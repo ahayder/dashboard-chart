@@ -1,27 +1,16 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useSelector } from "react-redux";
 
 const ScatterChart = () => {
-  const options = {
-    chart: {
-      type: "scatter",
-    },
-    title: {
-      text: "Sample Scatter Chart",
-    },
-    series: [
-      {
-        data: [
-          [1, 2],
-          [2, 4],
-          [3, 6],
-        ],
-      },
-    ],
-  };
+  const scatterChartOptions = useSelector(
+    (state) => state.dashboard.scatterChart
+  );
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <HighchartsReact highcharts={Highcharts} options={scatterChartOptions} />
+  );
 };
 
 export default ScatterChart;

@@ -3,25 +3,76 @@ import { createSlice } from "@reduxjs/toolkit";
 export const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: {
-    chartType: {
-      barChart: "bar",
-      boxWhiskerPlot: "box",
-      scatterChart: "scatter",
-      areaRangeChart: "area",
+    barChart: {
+      chart: {
+        type: "bar",
+      },
+      title: {
+        text: "Sample Bar Chart",
+      },
+      series: [
+        {
+          data: [1, 2, 3, 4, 5],
+        },
+      ],
     },
-    chartTitle: {
-      barChart: "Bar Chart",
-      boxWhiskerPlot: "Box and Whisker Plot",
-      scatterChart: "Scatter Chart",
-      areaRangeChart: "Area Range Chart",
+    boxWhiskerPlot: {
+      chart: {
+        type: "boxplot",
+      },
+      title: {
+        text: "Sample Box and Whisker Plot",
+      },
+      series: [
+        {
+          data: [
+            [760, 801, 848, 895, 965],
+            [733, 853, 939, 980, 1080],
+          ],
+        },
+      ],
+    },
+    scatterChart: {
+      chart: {
+        type: "scatter",
+      },
+      title: {
+        text: "Sample Scatter Chart",
+      },
+      series: [
+        {
+          data: [
+            [1, 2],
+            [2, 4],
+            [3, 6],
+          ],
+        },
+      ],
+    },
+    areaRangeChart: {
+      chart: {
+        type: "arearange",
+      },
+      title: {
+        text: "Sample Area Range Chart",
+      },
+      series: [
+        {
+          data: [
+            [1, 2, 3],
+            [2, 3, 4],
+            [3, 4, 5],
+          ],
+        },
+      ],
     },
   },
   reducers: {
     changeChartType: (state, action) => {
-      state.chartType[action.payload.key] = action.payload.type;
+      state[action.payload.key].chart.type = action.payload.type;
     },
     updateTitle: (state, action) => {
-      state.chartTitle[action.payload.key] = action.payload.title;
+      state[action.payload.key].title.text = action.payload.title;
     },
   },
 });

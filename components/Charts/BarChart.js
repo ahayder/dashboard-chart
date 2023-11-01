@@ -1,28 +1,12 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import HighchartsMore from "highcharts/highcharts-more";
-
-if (typeof Highcharts === "object") {
-  HighchartsMore(Highcharts);
-}
+import { useSelector } from "react-redux";
 
 const BarChart = () => {
-  const options = {
-    chart: {
-      type: "bar",
-    },
-    title: {
-      text: "Sample Bar Chart",
-    },
-    series: [
-      {
-        data: [1, 2, 3, 4, 5],
-      },
-    ],
-  };
+  const barChartOptions = useSelector((state) => state.dashboard.barChart);
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <HighchartsReact highcharts={Highcharts} options={barChartOptions} />;
 };
 
 export default BarChart;

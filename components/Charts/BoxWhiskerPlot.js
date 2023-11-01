@@ -1,26 +1,16 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useSelector } from "react-redux";
 
 const BoxWhiskerPlot = () => {
-  const options = {
-    chart: {
-      type: "boxplot",
-    },
-    title: {
-      text: "Sample Box and Whisker Plot",
-    },
-    series: [
-      {
-        data: [
-          [760, 801, 848, 895, 965],
-          [733, 853, 939, 980, 1080],
-        ],
-      },
-    ],
-  };
+  const boxWhiskerPlotOptions = useSelector(
+    (state) => state.dashboard.boxWhiskerPlot
+  );
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <HighchartsReact highcharts={Highcharts} options={boxWhiskerPlotOptions} />
+  );
 };
 
 export default BoxWhiskerPlot;

@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
+import "semantic-ui-css/semantic.min.css";
 
 function MyApp({ Component, pageProps }) {
   return (

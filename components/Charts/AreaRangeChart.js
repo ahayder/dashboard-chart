@@ -1,27 +1,16 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useSelector } from "react-redux";
 
 const AreaRangeChart = () => {
-  const options = {
-    chart: {
-      type: "arearange",
-    },
-    title: {
-      text: "Sample Area Range Chart",
-    },
-    series: [
-      {
-        data: [
-          [1, 2, 3],
-          [2, 3, 4],
-          [3, 4, 5],
-        ],
-      },
-    ],
-  };
+  const areaRangeChartOptions = useSelector(
+    (state) => state.dashboard.areaRangeChart
+  );
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <HighchartsReact highcharts={Highcharts} options={areaRangeChartOptions} />
+  );
 };
 
 export default AreaRangeChart;

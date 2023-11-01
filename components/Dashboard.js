@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -21,15 +21,44 @@ const Dashboard = () => {
   ];
 
   const dispatch = useDispatch();
-  const chartType = useSelector((state) => state.dashboard.chartType);
-  const chartTitle = useSelector((state) => state.dashboard.chartTitle);
+  const barChartType = useSelector(
+    (state) => state.dashboard.barChart.chart.type
+  );
+  const barChartTitle = useSelector(
+    (state) => state.dashboard.barChart.title.text
+  );
+  const boxWhiskerPlotType = useSelector(
+    (state) => state.dashboard.boxWhiskerPlot.chart.type
+  );
+  const boxWhiskerPlotTitle = useSelector(
+    (state) => state.dashboard.boxWhiskerPlot.title.text
+  );
+  const scatterChartType = useSelector(
+    (state) => state.dashboard.scatterChart.chart.type
+  );
+  const scatterChartTitle = useSelector(
+    (state) => state.dashboard.scatterChart.title.text
+  );
+  const areaRangeChartType = useSelector(
+    (state) => state.dashboard.areaRangeChart.chart.type
+  );
+  const areaRangeChartTitle = useSelector(
+    (state) => state.dashboard.areaRangeChart.title.text
+  );
 
-  const handleChangeChartType = (key, type) => {
-    dispatch(changeChartType({ key, type }));
-  };
-
-  const handleUpdateTitle = (key, title) => {
-    dispatch(updateTitle({ key, title }));
+  const renderChartComponent = (chartType, chartTitle) => {
+    switch (chartType) {
+      case "bar":
+        return <BarChart title={chartTitle} />;
+      case "boxWhisker":
+        return <BoxWhiskerPlot title={chartTitle} />;
+      case "scatter":
+        return <ScatterChart title={chartTitle} />;
+      case "areaRange":
+        return <AreaRangeChart title={chartTitle} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -44,32 +73,20 @@ const Dashboard = () => {
       bounds={"parent"}
     >
       <div key="barChart">
-        <BarChart />
-        <SettingsMenu
-          changeChartType={handleChangeChartType}
-          updateTitle={handleUpdateTitle}
-        />
+        <SettingsMenu chartKey="barChart" />
+        {renderChartComponent(barChartType, barChartTitle)}
       </div>
       <div key="boxWhiskerPlot">
-        <BoxWhiskerPlot />
-        <SettingsMenu
-          changeChartType={handleChangeChartType}
-          updateTitle={handleUpdateTitle}
-        />
+        <SettingsMenu chartKey="boxWhiskerPlot" />
+        {renderChartComponent(boxWhiskerPlotType, boxWhiskerPlotTitle)}
       </div>
       <div key="scatterChart">
-        <ScatterChart />
-        <SettingsMenu
-          changeChartType={handleChangeChartType}
-          updateTitle={handleUpdateTitle}
-        />
+        <SettingsMenu chartKey="scatterChart" />
+        {renderChartComponent(scatterChartType, scatterChartTitle)}
       </div>
       <div key="areaRangeChart">
-        <AreaRangeChart />
-        <SettingsMenu
-          changeChartType={handleChangeChartType}
-          updateTitle={handleUpdateTitle}
-        />
+        <SettingsMenu chartKey="areaRangeChart" />
+        {renderChartComponent(areaRangeChartType, areaRangeChartTitle)}
       </div>
     </ResponsiveGridLayout>
   );

@@ -1,19 +1,78 @@
-import React from "react";
+import { useState } from "react";
+import { Dropdown, Input } from "semantic-ui-react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeChartType, updateTitle } from "../redux/dashboardSlice";
 
-const SettingsMenu = ({ changeChartType, updateTitle }) => {
+const SettingsMenu = ({ chartKey }) => {
+  const dispatch = useDispatch();
+  const chartType = useSelector(
+    (state) => state.dashboard[chartKey].chart.type
+  );
+  const chartTitle = useSelector(
+    (state) => state.dashboard[chartKey].title.text
+  );
+
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [title, setTitle] = useState(chartTitle);
+
+  const handleChartTypeChange = (event, data) => {
+    dispatch(changeChartType({ key: chartKey, type: data.value }));
+  };
+
+  const handleTitleChange = (event, data) => {
+    setTitle(data.value);
+    dispatch(updateTitle({ key: chartKey, title: data.value }));
+  };
+
+  const handleCollapseClick = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
-    <div className="settings-menu">
-      <select onChange={(e) => changeChartType(e.target.value)}>
-        <option value="bar">Bar Chart</option>
-        <option value="box">Box and Whisker Plot</option>
-        <option value="scatter">Scatter Chart</option>
-        <option value="area">Area Range Chart</option>
-      </select>
-      <input
-        type="text"
-        placeholder="Chart Title"
-        onChange={(e) => updateTitle(e.target.value)}
-      />
+    <div className={`settings-menu ${isCollapsed ? "collapsed" : ""}`}>
+      <div className="settings-header" onClick={handleCollapseClick}>
+        <i className={`icon ${isCollapsed ? "cog" : "arrow down"}`} />
+        {!isCollapsed && (
+          <span style={{ display: "inline-block", marginBottom: "5px" }}>
+            Settings
+          </span>
+        )}
+      </div>
+      {!isCollapsed && (
+        <div
+          className="settings-body full-width"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <Dropdown
+            className="chart-type-dropdown full-width"
+            placeholder="Select Chart Type"
+            selection
+            options={[
+              { key: "bar", text: "Bar Chart", value: "bar" },
+              {
+                key: "boxWhisker",
+                text: "Box and Whisker Plot",
+                value: "boxWhisker",
+              },
+              { key: "scatter", text: "Scatter Chart", value: "scatter" },
+              {
+                key: "areaRange",
+                text: "Area Range Chart",
+                value: "areaRange",
+              },
+            ]}
+            value={chartType}
+            onChange={handleChartTypeChange}
+          />
+          <Input
+            className="chart-title-input full-width"
+            placeholder="Chart Title"
+            value={title}
+            onChange={handleTitleChange}
+          />
+        </div>
+      )}
+      <div style={{ height: "2px" }} />
     </div>
   );
 };
