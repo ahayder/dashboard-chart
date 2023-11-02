@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -8,7 +7,6 @@ import ScatterChart from "./Charts/ScatterChart";
 import AreaRangeChart from "./Charts/AreaRangeChart";
 import SettingsMenu from "./SettingsMenu";
 import { useSelector, useDispatch } from "react-redux";
-import { changeChartType, updateTitle } from "../redux/dashboardSlice";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -46,16 +44,16 @@ const Dashboard = () => {
     (state) => state.dashboard.areaRangeChart.title.text
   );
 
-  const renderChartComponent = (chartType, chartTitle) => {
+  const renderChartComponent = (chartType) => {
     switch (chartType) {
       case "bar":
-        return <BarChart title={chartTitle} />;
-      case "boxWhisker":
-        return <BoxWhiskerPlot title={chartTitle} />;
+        return <BarChart />;
+      case "boxplot":
+        return <BoxWhiskerPlot />;
       case "scatter":
-        return <ScatterChart title={chartTitle} />;
-      case "areaRange":
-        return <AreaRangeChart title={chartTitle} />;
+        return <ScatterChart />;
+      case "arearange":
+        return <AreaRangeChart />;
       default:
         return null;
     }
@@ -67,26 +65,26 @@ const Dashboard = () => {
       layouts={{ lg: layout }}
       breakpoints={{ lg: 1200 }}
       cols={{ lg: 16 }}
-      rowHeight={30}
+      rowHeight={100}
       isDraggable={true}
       isResizable={true}
       bounds={"parent"}
     >
       <div key="barChart">
         <SettingsMenu chartKey="barChart" />
-        {renderChartComponent(barChartType, barChartTitle)}
+        {renderChartComponent(barChartType)}
       </div>
       <div key="boxWhiskerPlot">
         <SettingsMenu chartKey="boxWhiskerPlot" />
-        {renderChartComponent(boxWhiskerPlotType, boxWhiskerPlotTitle)}
+        {renderChartComponent(boxWhiskerPlotType)}
       </div>
       <div key="scatterChart">
         <SettingsMenu chartKey="scatterChart" />
-        {renderChartComponent(scatterChartType, scatterChartTitle)}
+        {renderChartComponent(scatterChartType)}
       </div>
       <div key="areaRangeChart">
         <SettingsMenu chartKey="areaRangeChart" />
-        {renderChartComponent(areaRangeChartType, areaRangeChartTitle)}
+        {renderChartComponent(areaRangeChartType)}
       </div>
     </ResponsiveGridLayout>
   );

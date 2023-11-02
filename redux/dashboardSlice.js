@@ -69,7 +69,8 @@ export const dashboardSlice = createSlice({
   },
   reducers: {
     changeChartType: (state, action) => {
-      state[action.payload.key].chart.type = action.payload.type;
+      const { key, type } = action.payload;
+      state[key].chart.type = type;
     },
     updateTitle: (state, action) => {
       state[action.payload.key].title.text = action.payload.title;

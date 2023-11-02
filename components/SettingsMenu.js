@@ -52,13 +52,13 @@ const SettingsMenu = ({ chartKey }) => {
               {
                 key: "boxWhisker",
                 text: "Box and Whisker Plot",
-                value: "boxWhisker",
+                value: "boxplot",
               },
               { key: "scatter", text: "Scatter Chart", value: "scatter" },
               {
                 key: "areaRange",
                 text: "Area Range Chart",
-                value: "areaRange",
+                value: "arearange",
               },
             ]}
             value={chartType}
