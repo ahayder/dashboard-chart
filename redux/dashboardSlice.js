@@ -73,7 +73,8 @@ export const dashboardSlice = createSlice({
       state[key].chart.type = type;
     },
     updateTitle: (state, action) => {
-      state[action.payload.key].title.text = action.payload.title;
+      const { key, title } = action.payload;
+      state[key].title.text = title;
     },
   },
 });

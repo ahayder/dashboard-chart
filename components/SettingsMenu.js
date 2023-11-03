@@ -20,6 +20,7 @@ const SettingsMenu = ({ chartKey }) => {
   };
 
   const handleTitleChange = (event, data) => {
+    event.preventDefault();
     setTitle(data.value);
     dispatch(updateTitle({ key: chartKey, title: data.value }));
   };
