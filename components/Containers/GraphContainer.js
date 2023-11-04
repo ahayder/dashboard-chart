@@ -5,36 +5,20 @@ import ScatterChart from "../Charts/ScatterChart";
 import AreaRangeChart from "../Charts/AreaRangeChart";
 import SettingsMenu from "../SettingsMenu";
 import { useSelector } from "react-redux";
+import useContainerDimensions from "../../hooks/useContainerDimensions";
 
 const GraphContainer = ({ chartKey }) => {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
   const chartType = useSelector(
     (state) => state.dashboard[chartKey].chart.type
   );
-
   // I am not using the react-grid-layout onResize or onLayoutChange callbacks here
   // Because that would require more complicated logic to get the correct dimensions in pixels
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
-      }
-    });
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    // Clean up the observer on component unmount
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
+  // since react-grid-layout does not provide the dimensions in pixels
+  const { width, height } = useContainerDimensions(containerRef);
 
   const renderChartComponent = (chartType) => {
-    const commonProps = { ...dimensions };
+    const commonProps = { width, height };
 
     switch (chartType) {
       case "bar":
