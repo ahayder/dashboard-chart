@@ -5,7 +5,7 @@ import { useHighchartsResize } from "../../hooks/useHighchartsResize";
 
 const BarChart = ({ width, height }) => {
   const chartOptionsFromRedux = useSelector(
-    (state) => state.dashboard.barChart
+    (state) => state.dashboard.chartConfig.barChart
   );
 
   const { chartComponentRef, Highcharts, chartOptions } = useHighchartsResize(

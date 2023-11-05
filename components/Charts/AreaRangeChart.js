@@ -10,7 +10,7 @@ if (typeof Highcharts === "object") {
 
 const AreaRangeChart = ({ width, height }) => {
   const chartOptionsFromRedux = useSelector(
-    (state) => state.dashboard.areaRangeChart
+    (state) => state.dashboard.chartConfig.areaRangeChart
   );
 
   const { chartComponentRef, Highcharts, chartOptions } = useHighchartsResize(

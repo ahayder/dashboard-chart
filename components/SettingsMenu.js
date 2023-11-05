@@ -6,10 +6,10 @@ import { changeChartType, updateTitle } from "../redux/dashboardSlice";
 const SettingsMenu = ({ chartKey }) => {
   const dispatch = useDispatch();
   const chartType = useSelector(
-    (state) => state.dashboard[chartKey].chart.type
+    (state) => state.dashboard.chartConfig[chartKey].chart.type
   );
   const chartTitle = useSelector(
-    (state) => state.dashboard[chartKey].title.text
+    (state) => state.dashboard.chartConfig[chartKey].title.text
   );
 
   const [isCollapsed, setIsCollapsed] = useState(true);

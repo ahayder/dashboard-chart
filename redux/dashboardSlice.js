@@ -1,20 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import initialState from "./initialState";
+import { chartConfig } from "../utils/chart-config";
+import { grid_layout_config } from "../utils/grid-layout-config";
 
 export const dashboardSlice = createSlice({
   name: "dashboard",
-  initialState: initialState,
+  initialState: {
+    chartConfig: chartConfig,
+    layout: grid_layout_config,
+    breakPoint: "lg",
+  },
   reducers: {
     changeChartType: (state, action) => {
       const { key, type } = action.payload;
-      state[key].chart.type = type;
+      state.chartConfig[key].chart.type = type;
     },
     updateTitle: (state, action) => {
       const { key, title } = action.payload;
-      state[key].title.text = title;
+      state.chartConfig[key].title.text = title;
+    },
+    setBreakPoint: (state, action) => {
+      state.breakPoint = action.payload;
+    },
+    updateLayout: (state, action) => {
+      const { breakpoint, newLayout } = action.payload;
+      state.layout[breakpoint] = newLayout;
     },
   },
 });
 
-export const { changeChartType, updateTitle } = dashboardSlice.actions;
+export const { changeChartType, updateTitle, setBreakPoint, updateLayout } =
+  dashboardSlice.actions;
 export default dashboardSlice.reducer;

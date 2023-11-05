@@ -10,7 +10,7 @@ if (typeof Highcharts === "object") {
 
 const BoxWhiskerPlot = ({ width, height }) => {
   const chartOptionsFromRedux = useSelector(
-    (state) => state.dashboard.boxWhiskerPlot
+    (state) => state.dashboard.chartConfig.boxWhiskerPlot
   );
 
   const { chartComponentRef, Highcharts, chartOptions } = useHighchartsResize(

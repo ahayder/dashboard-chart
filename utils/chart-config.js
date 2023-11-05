@@ -1,4 +1,4 @@
-const initialState = {
+export const chartConfig = {
   barChart: {
     chart: {
       type: "bar",
@@ -63,5 +63,3 @@ const initialState = {
     ],
   },
 };
-
-export default initialState;

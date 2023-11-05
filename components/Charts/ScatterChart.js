@@ -5,7 +5,7 @@ import { useHighchartsResize } from "../../hooks/useHighchartsResize";
 
 const ScatterChart = ({ width, height }) => {
   const chartOptionsFromRedux = useSelector(
-    (state) => state.dashboard.scatterChart
+    (state) => state.dashboard.chartConfig.scatterChart
   );
 
   const { chartComponentRef, Highcharts, chartOptions } = useHighchartsResize(

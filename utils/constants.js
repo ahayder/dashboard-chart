@@ -1,6 +1,6 @@
-export const chartTypes = [
-  { barChart: "barChart" },
-  { areaRangeChart: "areaRangeChart" },
-  { boxWhiskerPlot: "boxWhiskerPlot" },
-  { scatterChart: "scatterChart" },
-];
+export const chartTypes = {
+  barChart: "barChart",
+  boxWhiskerPlot: "boxWhiskerPlot",
+  scatterChart: "scatterChart",
+  areaRangeChart: "areaRangeChart",
+};

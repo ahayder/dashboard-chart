@@ -10,7 +10,7 @@ import useContainerDimensions from "../../hooks/useContainerDimensions";
 const GraphContainer = ({ chartKey }) => {
   const containerRef = useRef(null);
   const chartType = useSelector(
-    (state) => state.dashboard[chartKey].chart.type
+    (state) => state.dashboard.chartConfig[chartKey].chart.type
   );
   // I am not using the react-grid-layout onResize or onLayoutChange callbacks here
   // Because that would require more complicated logic to get the correct dimensions in pixels
