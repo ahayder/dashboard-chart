@@ -29,15 +29,43 @@ a {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px;
-  border-radius: 0 0 0 5px;
+  color: black;
+  background-color: lightgrey;
   z-index: 1;
+}
+
+.settings-header {
+  padding: 1rem;
+  background-color: #2b2b2b;
+  color: white;
+  font-size: larger;
+}
+
+.settings-body {
+  padding: 1rem;
+  width: 30rem;
 }
 
 .settings-menu select,
 .settings-menu input {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  color: gray !important;
+}
+
+.chart-title-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.chart-type-dropdown {
+  width: 100%;
+}
+
+.save-title-button {
+  margin-top: 1rem !important;
+}
+
+.error-message {
+  color: red;
+  font-size: small;
 }

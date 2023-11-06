@@ -1,21 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import BarChart from "../Charts/BarChart";
 import BoxWhiskerPlot from "../Charts/BoxWhiskerPlot";
 import ScatterChart from "../Charts/ScatterChart";
 import AreaRangeChart from "../Charts/AreaRangeChart";
 import SettingsMenu from "../SettingsMenu";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setOpenSettingsKey } from "../../redux/dashboardSlice";
 import useContainerDimensions from "../../hooks/useContainerDimensions";
 
 const GraphContainer = ({ chartKey }) => {
+  const dispatch = useDispatch();
+  const openMenuKey = useSelector((state) => state.dashboard.openSettingsKey);
   const containerRef = useRef(null);
+  const { width, height } = useContainerDimensions(containerRef);
   const chartType = useSelector(
     (state) => state.dashboard.chartConfig[chartKey].chart.type
   );
-  // I am not using the react-grid-layout onResize or onLayoutChange callbacks here
-  // Because that would require more complicated logic to get the correct dimensions in pixels
-  // since react-grid-layout does not provide the dimensions in pixels
-  const { width, height } = useContainerDimensions(containerRef);
+
+  const handleMenuToggle = () => {
+    dispatch(setOpenSettingsKey(openMenuKey === chartKey ? null : chartKey));
+  };
 
   const renderChartComponent = (chartType) => {
     const commonProps = { width, height };
@@ -30,13 +34,17 @@ const GraphContainer = ({ chartKey }) => {
       case "arearange":
         return <AreaRangeChart {...commonProps} />;
       default:
-        return null;
+        return <div>Unsupported chart type</div>;
     }
   };
 
   return (
     <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
-      <SettingsMenu chartKey={chartKey} />
+      <SettingsMenu
+        chartKey={chartKey}
+        isOpen={openMenuKey === chartKey}
+        onToggle={handleMenuToggle}
+      />
       {renderChartComponent(chartType)}
     </div>
   );

@@ -8,6 +8,7 @@ export const dashboardSlice = createSlice({
     chartConfig: chartConfig,
     layout: grid_layout_config,
     breakPoint: "lg",
+    openSettingsKey: null,
   },
   reducers: {
     changeChartType: (state, action) => {
@@ -25,9 +26,18 @@ export const dashboardSlice = createSlice({
       const { breakpoint, newLayout } = action.payload;
       state.layout[breakpoint] = newLayout;
     },
+    setOpenSettingsKey: (state, action) => {
+      state.openSettingsKey =
+        state.openSettingsKey === action.payload ? null : action.payload;
+    },
   },
 });
 
-export const { changeChartType, updateTitle, setBreakPoint, updateLayout } =
-  dashboardSlice.actions;
+export const {
+  changeChartType,
+  updateTitle,
+  setBreakPoint,
+  updateLayout,
+  setOpenSettingsKey,
+} = dashboardSlice.actions;
 export default dashboardSlice.reducer;

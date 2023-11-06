@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import GraphContainer from "./Containers/GraphContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { setBreakPoint, updateLayout } from "../redux/dashboardSlice";
+import { breakpoints, columns } from "../utils/grid-layout-config";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -17,19 +18,21 @@ const Dashboard = () => {
         dispatch(setBreakPoint(newBreakpoint));
       }
     },
-    [dispatch, breakPoint]
+    [breakPoint, dispatch]
   );
 
   const handleLayoutChange = useCallback(
     (newLayout, layouts) => {
       dispatch(
-        updateLayout({
-          breakpoint: breakPoint,
-          newLayout: layouts[breakPoint],
-        })
+        updateLayout({ breakpoint: breakPoint, newLayout: layouts[breakPoint] })
       );
     },
-    [dispatch, breakPoint]
+    [breakPoint, dispatch]
+  );
+
+  const layoutForCurrentBreakpoint = useMemo(
+    () => layout[breakPoint],
+    [layout, breakPoint]
   );
 
   return (
@@ -37,14 +40,12 @@ const Dashboard = () => {
       <ResponsiveGridLayout
         className="layout"
         layouts={layout}
-        onLayoutChange={handleLayoutChange}
-        breakpoints={{ lg: 1200, md: 880, sm: 720, xs: 480 }}
         onBreakpointChange={handleBreakpointChange}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4 }}
-        isDraggable
-        isResizable
+        onLayoutChange={handleLayoutChange}
+        breakpoints={breakpoints}
+        cols={columns}
       >
-        {layout[breakPoint].map((layoutItem) => (
+        {layoutForCurrentBreakpoint.map((layoutItem) => (
           <div key={layoutItem.i} data-grid={layoutItem}>
             <GraphContainer chartKey={layoutItem.i} />
           </div>
