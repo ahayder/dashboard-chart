@@ -1,15 +1,24 @@
-import React from "react";
-import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useSelector } from "react-redux";
+import { useHighchartsResize } from "../../hooks/useHighchartsResize";
 
-const ScatterChart = () => {
-  const scatterChartOptions = useSelector(
-    (state) => state.dashboard.scatterChart
+const ScatterChart = ({ width, height }) => {
+  const chartOptionsFromRedux = useSelector(
+    (state) => state.dashboard.chartConfig.scatterChart
+  );
+
+  const { chartComponentRef, Highcharts, chartOptions } = useHighchartsResize(
+    chartOptionsFromRedux,
+    width,
+    height
   );
 
   return (
-    <HighchartsReact highcharts={Highcharts} options={scatterChartOptions} />
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={chartOptions}
+      ref={chartComponentRef}
+    />
   );
 };
 

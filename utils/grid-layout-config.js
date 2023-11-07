@@ -1,0 +1,123 @@
+import { chartTypeToKey } from "./constants";
+export const grid_layout_config = {
+  lg: [
+    {
+      x: 0,
+      y: 0,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.bar,
+    },
+    {
+      x: 6,
+      y: 0,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.arearange,
+    },
+    {
+      x: 0,
+      y: 2,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.boxplot,
+    },
+    {
+      x: 6,
+      y: 2,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.scatter,
+    },
+  ],
+  md: [
+    {
+      x: 0,
+      y: 0,
+      w: 5,
+      h: 2,
+      i: chartTypeToKey.bar,
+    },
+    {
+      x: 5,
+      y: 0,
+      w: 5,
+      h: 2,
+      i: chartTypeToKey.arearange,
+    },
+    {
+      x: 0,
+      y: 2,
+      w: 5,
+      h: 2,
+      i: chartTypeToKey.boxplot,
+    },
+    {
+      x: 5,
+      y: 2,
+      w: 5,
+      h: 2,
+      i: chartTypeToKey.scatter,
+    },
+  ],
+  sm: [
+    {
+      x: 0,
+      y: 0,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.bar,
+    },
+    {
+      x: 0,
+      y: 2,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.arearange,
+    },
+    {
+      x: 0,
+      y: 4,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.boxplot,
+    },
+    {
+      x: 0,
+      y: 6,
+      w: 6,
+      h: 3,
+      i: chartTypeToKey.scatter,
+    },
+  ],
+  xs: [
+    {
+      x: 0,
+      y: 0,
+      w: 4,
+      h: 2,
+      i: chartTypeToKey.bar,
+    },
+    {
+      x: 0,
+      y: 2,
+      w: 4,
+      h: 2,
+      i: chartTypeToKey.arearange,
+    },
+    {
+      x: 0,
+      y: 4,
+      w: 4,
+      h: 2,
+      i: chartTypeToKey.boxplot,
+    },
+    {
+      x: 0,
+      y: 6,
+      w: 4,
+      h: 2,
+      i: chartTypeToKey.scatter,
+    },
+  ],
+};
