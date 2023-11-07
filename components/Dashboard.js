@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import GraphContainer from "./Containers/GraphContainer";
+import GraphContainer from "./GraphContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { setBreakPoint, updateLayout } from "../redux/dashboardSlice";
 import { breakpoints, columns } from "../utils/grid-layout-config";

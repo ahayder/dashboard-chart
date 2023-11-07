@@ -40,7 +40,7 @@ const SettingsMenu = ({ chartKey }) => {
       setTitleError("Invalid characters used.");
     } else {
       setTitle(data.value);
-      setTitleError(""); // Clear error message if valid
+      setTitleError("");
     }
   }, []);
 
@@ -66,6 +66,7 @@ const SettingsMenu = ({ chartKey }) => {
         <i
           className={`icon ${isOpen ? "arrow up" : "cog"}`}
           style={{ fontSize: "larger" }}
+          data-testid="settings-icon"
         />
         {isOpen && <strong>Settings</strong>}
       </div>
@@ -80,6 +81,7 @@ const SettingsMenu = ({ chartKey }) => {
             value={chartType}
             onChange={handleChartTypeChange}
             className="chart-type-dropdown"
+            data-testid="chart-type-dropdown"
           />
           {isDefaultType && (
             <div className="chart-title-container">
@@ -90,16 +92,22 @@ const SettingsMenu = ({ chartKey }) => {
                 value={title}
                 onChange={handleTitleChange}
                 error={titleError ? true : false}
+                data-testid="chart-title-input"
               />
               <Button
                 onClick={handleSaveTitle}
                 disabled={title === chartTitle || titleError}
                 className="save-title-button"
                 color="instagram"
+                data-testid="save-title-button"
               >
                 Save
               </Button>
-              {titleError && <div className="error-message">{titleError}</div>}
+              {titleError && (
+                <div data-testid="error-message" className="error-message">
+                  {titleError}
+                </div>
+              )}
             </div>
           )}
         </div>

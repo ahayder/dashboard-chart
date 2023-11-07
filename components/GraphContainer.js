@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import BarChart from "../Charts/BarChart";
-import BoxWhiskerPlot from "../Charts/BoxWhiskerPlot";
-import ScatterChart from "../Charts/ScatterChart";
-import AreaRangeChart from "../Charts/AreaRangeChart";
-import SettingsMenu from "../SettingsMenu";
+import BarChart from "./Charts/BarChart";
+import BoxWhiskerPlot from "./Charts/BoxWhiskerPlot";
+import ScatterChart from "./Charts/ScatterChart";
+import AreaRangeChart from "./Charts/AreaRangeChart";
+import SettingsMenu from "./SettingsMenu";
 import { useSelector, useDispatch } from "react-redux";
-import { setOpenSettingsKey } from "../../redux/dashboardSlice";
-import useContainerDimensions from "../../hooks/useContainerDimensions";
+import { setOpenSettingsKey } from "../redux/dashboardSlice";
+import useContainerDimensions from "../hooks/useContainerDimensions";
 
 const GraphContainer = ({ chartKey }) => {
   const dispatch = useDispatch();
