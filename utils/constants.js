@@ -5,7 +5,14 @@ export const chartTypes = {
   boxWhisker: { key: "boxWhiskerPlot", type: "boxplot" },
 };
 
-export const defaultChartTypes = {
+export const charTtypeToKey = {
+  bar: "barChart",
+  boxplot: "boxWhiskerPlot",
+  scatter: "scatterChart",
+  arearange: "areaRangeChart",
+};
+
+export const chartKeyToType = {
   barChart: "bar",
   boxWhiskerPlot: "boxplot",
   scatterChart: "scatter",

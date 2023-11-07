@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { chartConfig } from "../utils/chart-config";
+import { chartConfig, defaultChartConfig } from "../utils/chart-config";
 import { grid_layout_config } from "../utils/grid-layout-config";
+import { charTtypeToKey } from "../utils/constants";
 
 export const dashboardSlice = createSlice({
   name: "dashboard",
@@ -13,7 +14,18 @@ export const dashboardSlice = createSlice({
   reducers: {
     changeChartType: (state, action) => {
       const { key, type } = action.payload;
-      state.chartConfig[key].chart.type = type;
+      const newChartKey = charTtypeToKey[type];
+
+      // Here I am assuming that each chart position is fixed to the initial layout
+      // If I change the chart type to any other chart
+      // And then agina if I want to select the default chart in the same position
+      // It will show the default chart again
+      if (key === newChartKey) {
+        state.chartConfig[key] = { ...defaultChartConfig[key] };
+      } else {
+        const newChartConfig = state.chartConfig[newChartKey];
+        state.chartConfig[key] = { ...newChartConfig };
+      }
     },
     updateTitle: (state, action) => {
       const { key, title } = action.payload;

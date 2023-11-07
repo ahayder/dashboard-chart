@@ -6,7 +6,7 @@ import {
   setOpenSettingsKey,
   updateTitle,
 } from "../redux/dashboardSlice";
-import { chartTypes, defaultChartTypes } from "../utils/constants";
+import { chartTypes, chartKeyToType } from "../utils/constants";
 
 const dropdownOptions = [
   { key: chartTypes.bar.key, text: "Bar Chart", value: chartTypes.bar.type },
@@ -45,7 +45,7 @@ const SettingsMenu = ({ chartKey }) => {
 
   const handleChartTypeChange = useCallback(
     (event, data) => {
-      const isDefaultType = data.value === defaultChartTypes[chartKey];
+      const isDefaultType = data.value === chartKeyToType[chartKey];
       dispatch(changeChartType({ key: chartKey, type: data.value }));
     },
     [chartKey, dispatch]
@@ -75,7 +75,7 @@ const SettingsMenu = ({ chartKey }) => {
     dispatch(setOpenSettingsKey(chartKey));
   }, [chartKey, dispatch]);
 
-  const isDefaultType = chartType === defaultChartTypes[chartKey];
+  const isDefaultType = chartType === chartKeyToType[chartKey];
   const isOpen = openSettingsKey === chartKey;
 
   return (
