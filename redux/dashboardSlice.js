@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { chartConfig, defaultChartConfig } from "../utils/chart-config";
 import { grid_layout_config } from "../utils/grid-layout-config";
-import { charTtypeToKey } from "../utils/constants";
+import { chartTypeToKey } from "../utils/constants";
 
 export const dashboardSlice = createSlice({
   name: "dashboard",
@@ -14,7 +14,7 @@ export const dashboardSlice = createSlice({
   reducers: {
     changeChartType: (state, action) => {
       const { key, type } = action.payload;
-      const newChartKey = charTtypeToKey[type];
+      const newChartKey = chartTypeToKey[type];
 
       // Here I am assuming that each chart position is fixed to the initial layout
       // If I change the chart type to any other chart

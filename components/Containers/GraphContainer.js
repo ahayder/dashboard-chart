@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import BarChart from "../Charts/BarChart";
 import BoxWhiskerPlot from "../Charts/BoxWhiskerPlot";
 import ScatterChart from "../Charts/ScatterChart";
@@ -39,7 +39,7 @@ const GraphContainer = ({ chartKey }) => {
   };
 
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={containerRef} className="graph-container">
       <SettingsMenu
         chartKey={chartKey}
         isOpen={openMenuKey === chartKey}

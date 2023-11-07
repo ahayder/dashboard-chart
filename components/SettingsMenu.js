@@ -6,26 +6,8 @@ import {
   setOpenSettingsKey,
   updateTitle,
 } from "../redux/dashboardSlice";
-import { chartTypes, chartKeyToType } from "../utils/constants";
+import { chartKeyToType, dropdownOptions } from "../utils/constants";
 
-const dropdownOptions = [
-  { key: chartTypes.bar.key, text: "Bar Chart", value: chartTypes.bar.type },
-  {
-    key: chartTypes.boxWhisker.key,
-    text: "Box and Whisker Plot",
-    value: chartTypes.boxWhisker.type,
-  },
-  {
-    key: chartTypes.scatter.key,
-    text: "Scatter Chart",
-    value: chartTypes.scatter.type,
-  },
-  {
-    key: chartTypes.areaRange.key,
-    text: "Area Range Chart",
-    value: chartTypes.areaRange.type,
-  },
-];
 const MAX_TITLE_LENGTH = 100;
 const VALID_TITLE_REGEX = /^[a-zA-Z0-9 _-]*$/;
 

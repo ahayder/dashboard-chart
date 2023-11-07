@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import GraphContainer from "./Containers/GraphContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { setBreakPoint, updateLayout } from "../redux/dashboardSlice";
 import { breakpoints, columns } from "../utils/grid-layout-config";
+import { chartTypeToKey } from "../utils/constants";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -30,11 +31,6 @@ const Dashboard = () => {
     [breakPoint, dispatch]
   );
 
-  const layoutForCurrentBreakpoint = useMemo(
-    () => layout[breakPoint],
-    [layout, breakPoint]
-  );
-
   return (
     <div className="dashboard">
       <ResponsiveGridLayout
@@ -45,9 +41,9 @@ const Dashboard = () => {
         breakpoints={breakpoints}
         cols={columns}
       >
-        {layoutForCurrentBreakpoint.map((layoutItem) => (
-          <div key={layoutItem.i} data-grid={layoutItem}>
-            <GraphContainer chartKey={layoutItem.i} />
+        {Object.entries(chartTypeToKey).map(([type, key]) => (
+          <div key={key}>
+            <GraphContainer chartKey={key} />
           </div>
         ))}
       </ResponsiveGridLayout>
